@@ -110,6 +110,14 @@ class TestStringCalculator < Minitest::Test
   def test_multiple_custom_delimiters_any_length
     assert_equal 6, @calculator.add("//[**][%%]\n1**2%%3")
   end
+  
+  def test_negative_numbers
+    assert_raises(StringCalculator::NegativeNumberError) { @calculator.add("1,-2,3") }
+  end
+
+  def test_multiple_negative_numbers
+    assert_raises(StringCalculator::NegativeNumberError) { @calculator.add("1,-2,3,-4") }
+  end
 
 end
 
