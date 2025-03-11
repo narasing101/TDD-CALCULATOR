@@ -94,5 +94,22 @@ class TestStringCalculator < Minitest::Test
   def test_custom_delimiter
     assert_equal 3, @calculator.add("//;\n1;2")
   end
+
+  def test_ignore_large_numbers
+    assert_equal 2, @calculator.add("2,1001")
+  end
+
+  def test_custom_delimiter_any_length
+    assert_equal 6, @calculator.add("//[***]\n1***2***3")
+  end
+
+  def test_multiple_custom_delimiters
+    assert_equal 6, @calculator.add("//[*][%]\n1*2%3")
+  end
+
+  def test_multiple_custom_delimiters_any_length
+    assert_equal 6, @calculator.add("//[**][%%]\n1**2%%3")
+  end
+
 end
 
